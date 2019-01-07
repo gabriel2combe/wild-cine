@@ -9,6 +9,7 @@
         <thead>
             <tr>
                 <th>Titre</th>
+                <th>Langue</th>
                 <th>Date de sortie</th>
                 <th>Durée</th>
                 <th>Poster</th>
@@ -23,6 +24,7 @@
         {% for movie in movies %}
             <tr>
                 <td>{{ movie.title }}</td>
+                <td>{{ movie.language }}</td>
                 <td>{{ movie.releaseDate ? movie.releaseDate|date('Y-m-d') : '' }}</td>
                 <td>{{ movie.length ? movie.length|date('H:i:s') : '' }}</td>
                 <td>{{ movie.poster }}</td>
