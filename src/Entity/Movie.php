@@ -68,6 +68,11 @@ class Movie
      */
     private $movieWorkers;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $language;
+
 
     public function __construct()
     {
@@ -234,6 +239,18 @@ class Movie
                 $movieWorker->setFkMovie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLanguage(): ?string
+    {
+        return $this->language;
+    }
+
+    public function setLanguage(string $language): self
+    {
+        $this->language = $language;
 
         return $this;
     }

@@ -8,27 +8,27 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ movie.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
+                <th>Titre</th>
                 <td>{{ movie.title }}</td>
             </tr>
             <tr>
-                <th>Release_date</th>
+                <th>Langue</th>
+                <td>{{ movie.language }}</td>
+            </tr>
+            <tr>
+                <th>Date de sortie</th>
                 <td>{{ movie.releaseDate ? movie.releaseDate|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Length</th>
+                <th>Durée</th>
                 <td>{{ movie.length ? movie.length|date('H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Poster</th>
+                <th>Affiche</th>
                 <td>{{ movie.poster }}</td>
             </tr>
             <tr>
-                <th>Trailer</th>
+                <th>Bande Annonce</th>
                 <td>{{ movie.trailer }}</td>
             </tr>
             <tr>
