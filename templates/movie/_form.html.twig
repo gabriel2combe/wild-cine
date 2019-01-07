@@ -1,0 +1,33 @@
+{{ form_start(form) }}
+
+<div class="offset-0.5 col-7">
+    {{ form_label(form.title, 'Titre') }}
+    {{ form_widget(form.title, {'attr': {'class': 'title_field'}}) }}
+
+    {{ form_label(form.language, 'Langue') }}
+    {{ form_widget(form.language, {'attr': {'class': 'language_field'}}) }}
+
+    {{ form_label(form.release_date, 'Date de sortie') }}
+    {{ form_widget(form.release_date, {'attr': {'class': 'release_date_field'}}) }}
+
+    {{ form_label(form.length, 'Durée') }}
+    {{ form_widget(form.length, {'attr': {'class': 'length_field'}}) }}
+
+    {{ form_label(form.poster, 'Affiche') }}
+    {{ form_widget(form.poster, {'attr': {'class': 'poster_field'}}) }}
+
+    {{ form_label(form.trailer, 'Bande Annonce') }}
+    {{ form_widget(form.trailer, {'attr': {'class': 'trailer_field'}}) }}
+
+    {{ form_label(form.synopsis, 'Synopsis') }}
+    {{ form_widget(form.synopsis, {'attr': {'class': 'synopsis_field'}}) }}
+
+    {{ form_label(form.budget, 'Budget') }}
+    {{ form_widget(form.budget, {'attr': {'class': 'budget_field'}}) }}
+
+    {{ form_label(form.box_office, 'Box Office') }}
+    {{ form_widget(form.box_office, {'attr': {'class': 'box_office_field'}}) }}
+</div>
+
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

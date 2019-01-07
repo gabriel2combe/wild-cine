@@ -1,0 +1,27 @@
+{{ form_start(form) }}
+<div class="row">
+    <div class="offset-1 col-6">
+        <div class="form-row align-items-center">
+            <div class="col-6 ">
+                {{ form_label(form.first_name, 'Prénom') }}
+                {{ form_widget(form.first_name, {'attr': {'class': 'first_name_field'}}) }}
+            </div>
+            <div class="col-6">
+                {{ form_label(form.last_name, 'Nom') }}
+                {{ form_widget(form.last_name, {'attr': {'class': 'last_name_field'}}) }}
+            </div>
+        </div>
+
+        {{ form_label(form.nationality, 'Nationalité') }}
+        {{ form_widget(form.nationality, {'attr': {'class': 'nationality_field'}}) }}
+
+        {{ form_label(form.born, 'Date de naissance') }}
+        {{ form_widget(form.born, {'attr': {'class': 'born_field'}}) }}
+
+        {{ form_label(form.biography, 'Biographie') }}
+        {{ form_widget(form.biography, {'attr': {'class': 'biography_field'}}) }}
+    </div>
+</div>
+
+<button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

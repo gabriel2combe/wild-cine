@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Movie{% endblock %}
+
+{% block body %}
+    <h1>Movie</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Titre</th>
+                <td>{{ movie.title }}</td>
+            </tr>
+            <tr>
+                <th>Langue</th>
+                <td>{{ movie.language }}</td>
+            </tr>
+            <tr>
+                <th>Date de sortie</th>
+                <td>{{ movie.releaseDate ? movie.releaseDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Durée</th>
+                <td>{{ movie.length ? movie.length|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Affiche</th>
+                <td>{{ movie.poster }}</td>
+            </tr>
+            <tr>
+                <th>Bande Annonce</th>
+                <td>{{ movie.trailer }}</td>
+            </tr>
+            <tr>
+                <th>Synopsis</th>
+                <td>{{ movie.synopsis }}</td>
+            </tr>
+            <tr>
+                <th>Budget</th>
+                <td>{{ movie.budget }}</td>
+            </tr>
+            <tr>
+                <th>Box_office</th>
+                <td>{{ movie.boxOffice }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('movie_index') }}">back to list</a>
+
+    <a href="{{ path('movie_edit', {'id': movie.id}) }}">edit</a>
+
+    {{ include('movie/_delete_form.html.twig') }}
+{% endblock %}
