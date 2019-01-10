@@ -19,6 +19,22 @@ class MovieRepository extends ServiceEntityRepository
         parent::__construct($registry, Movie::class);
     }
 
+    /**
+     * @return Movie[]
+     */
+    public function findNextRelease(): array //Returns the next 9 release of movies
+    {
+        $max_result = 9;
+        
+        return $this->createQueryBuilder('m') // "m" is an alias for Movie table
+            ->where('m.release_date >= CURRENT_TIMESTAMP()')
+            ->orderBy('m.release_date', 'ASC')
+            ->setMaxResults($max_result)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Movie[] Returns an array of Movie objects
     //  */
