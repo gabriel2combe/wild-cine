@@ -6,6 +6,7 @@ use App\Entity\Movie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
+
 /**
  * @method Movie|null find($id, $lockMode = null, $lockVersion = null)
  * @method Movie|null findOneBy(array $criteria, array $orderBy = null)
@@ -20,14 +21,29 @@ class MovieRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return Movie[] Returns an array of Movie objects
+     */
+    public function findSomeTodayRelease($count): array //Returns '$count' random movies released today
+    {
+        return $this->createQueryBuilder('m')
+            ->addSelect('RAND() as HIDDEN rand')
+            ->addOrderBy('rand')
+            ->where('m.release_date = CURRENT_DATE()')
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
      * @return Movie[]
      */
-    public function findNextRelease(): array //Returns the next 9 release of movies
+    public function findByNextRelease(): array //Returns the next 9 release of movies
     {
         $max_result = 9;
         
         return $this->createQueryBuilder('m') // "m" is an alias for Movie table
-            ->where('m.release_date >= CURRENT_TIMESTAMP()')
+            ->where('m.release_date > CURRENT_TIMESTAMP()')
             ->orderBy('m.release_date', 'ASC')
             ->setMaxResults($max_result)
             ->getQuery()
