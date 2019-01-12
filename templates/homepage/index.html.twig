@@ -1,0 +1,204 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block body %}
+
+<style>
+    .blog .carousel-indicators {
+        left: 0;
+        top: auto;
+        bottom: -40px;
+
+    }
+
+    /* The colour of the indicators */
+    .blog .carousel-indicators li {
+        background: #a3a3a3;
+        border-radius: 50%;
+        width: 8px;
+        height: 8px;
+    }
+
+    .blog .carousel-indicators .active {
+        background: #707070;
+    }
+</style>
+
+<h1>Hello</h1>
+
+homepage
+
+
+{{ dump(todayMovies) }}
+<div class="container">
+    <h2>Today sorties</h2>
+    {% for movie in todayMovies %}
+    <div class="row-12">
+        <a href="{{ path('movie_show', {'id': movie.id}) }}">
+            <div class="card" style="width: 12rem;">
+                <img class="card-img-top" src="http://placehold.it/150x150" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ movie.title }}</h5>
+                    <p class="card-text">Some quick example text to build on the card title</p>
+                </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+
+<h2>Prochaines sorties</h2>
+
+{{ dump(nextMovies) }}
+{% if nextMovies.0 is defined %}
+<div class="container">
+    <div class="row blog">
+        <div class="col-md-12">
+            <div id="blogCarousel" class="carousel slide" data-ride="carousel">
+
+                {% if nextMovies.5 is defined %}
+                <ol class="carousel-indicators">
+                    <li data-target="#blogCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#blogCarousel" data-slide-to="1"></li>
+                    {% if nextMovies.8 is defined %}<li data-target="#blogCarousel" data-slide-to="2"></li>{% endif %}
+                </ol>
+                {% endif %}
+
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a href="{{ path('movie_show', {'id': nextMovies.0.id}) }}">
+                                    <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3>{{ nextMovies.0.title }}</h3>
+                                        <p>...</p>
+                                    </div>
+                                </a>
+                            </div>
+                            {% if nextMovies.1 is defined %}
+                            <div class="col-md-4">
+                                <a href="{{ path('movie_show', {'id': nextMovies.1.id}) }}">
+                                    <img src="http://placehold.it/250x200" alt="Image" style="max-width:100%;">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3>{{ nextMovies.1.title }}</h3>
+                                        <p>...</p>
+                                    </div>
+                                </a>
+                            </div>
+                            {% endif %}
+                            {% if nextMovies.1 is defined %}
+                            <div class="col-md-4">
+                                <a href="{{ path('movie_show', {'id': nextMovies.2.id}) }}">
+                                    <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3>{{ nextMovies.2.title }}</h3>
+                                        <p>...</p>
+                                    </div>
+                                </a>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <!--.row-->
+                    </div>
+                    <!--.item-->
+
+                    {% if nextMovies.5 is defined %}
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a href="{{ path('movie_show', {'id': nextMovies.3.id}) }}">
+                                    <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3>{{ nextMovies.3.title }}</h3>
+                                        <p>...</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="{{ path('movie_show', {'id': nextMovies.4.id}) }}">
+                                    <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3>{{ nextMovies.4.title }}</h3>
+                                        <p>...</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="{{ path('movie_show', {'id': nextMovies.5.id}) }}">
+                                    <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3>{{ nextMovies.5.title }}</h3>
+                                        <p>...</p>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+                        <!--.row-->
+                    </div>
+                    {% endif %}
+                    <!--.item-->
+
+                    {% if nextMovies.8 is defined %}
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a href="{{ path('movie_show', {'id': nextMovies.6.id}) }}">
+                                    <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3>{{ nextMovies.6.title }}</h3>
+                                        <p>...</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="{{ path('movie_show', {'id': nextMovies.7.id}) }}">
+                                    <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3>{{ nextMovies.7.title }}</h3>
+                                        <p>...</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="{{ path('movie_show', {'id': nextMovies.8.id}) }}">
+                                    <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3>{{ nextMovies.8.title }}</h3>
+                                        <p>...</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <!--.row-->
+                    </div>
+                    {% endif %}
+                    <!--.item-->
+
+                </div>
+                <!--.carousel-inner-->
+            </div>
+            <!--.Carousel-->
+
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+
+
+
+<h2>A voir ou revoir</h2>
+
+{{ dump(oneReleasedMovie) }}
+
+
+
+
+</div>
+{% endblock %}
