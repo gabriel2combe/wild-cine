@@ -18,11 +18,13 @@ class HomepageController extends AbstractController
     public function index()
     {
         $repository = $this->getDoctrine()->getRepository(Movie::class);
-        $nextMovies = $repository->findByNextRelease();
-        $todayMovies = $repository->findSomeTodayRelease(3);
+        $nextMovies = $repository->findByNextRelease($max_result = 9);
+        $todayMovies = $repository->findSomeTodayRelease($max_result = 3);
+        $oneReleasedMovie = $repository->findOneReleasedMovie();
         return $this->render('homepage/index.html.twig', [
             'nextMovies' => $nextMovies,
             'todayMovies' =>  $todayMovies,
+            'oneReleasedMovie' => $oneReleasedMovie,
         ]);
     }
 }
