@@ -20,16 +20,28 @@ class MovieRepository extends ServiceEntityRepository
         parent::__construct($registry, Movie::class);
     }
 
+    //TODO use note's movie instead of budget
+    public function findOneReleasedMovie($note = 0): ?Movie //Returns one random released movie
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.release_date < CURRENT_DATE()')
+            ->andWhere('m.budget >= :note')
+            ->setParameter('note', $note)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     /**
      * @return Movie[] Returns an array of Movie objects
      */
-    public function findSomeTodayRelease($count): array //Returns '$count' random movies released today
+    public function findSomeTodayRelease($max_result): array //Returns random movies released today
     {
         return $this->createQueryBuilder('m')
             ->addSelect('RAND() as HIDDEN rand')
             ->addOrderBy('rand')
             ->where('m.release_date = CURRENT_DATE()')
-            ->setMaxResults($count)
+            ->setMaxResults($max_result)
             ->getQuery()
             ->getResult()
         ;
@@ -38,18 +50,18 @@ class MovieRepository extends ServiceEntityRepository
     /**
      * @return Movie[]
      */
-    public function findByNextRelease(): array //Returns the next 9 release of movies
-    {
-        $max_result = 9;
-        
+    public function findByNextRelease($max_result): array //Returns the next 9 release of movies
+    {        
         return $this->createQueryBuilder('m') // "m" is an alias for Movie table
-            ->where('m.release_date > CURRENT_TIMESTAMP()')
+            ->where('m.release_date > CURRENT_DATE()')
             ->orderBy('m.release_date', 'ASC')
             ->setMaxResults($max_result)
             ->getQuery()
             ->getResult()
         ;
     }
+
+
 
     // /**
     //  * @return Movie[] Returns an array of Movie objects
