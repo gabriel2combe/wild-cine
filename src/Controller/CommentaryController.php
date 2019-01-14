@@ -10,6 +10,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+use App\Entity\Movie;
+use App\Form\MovieType;
+use App\Repository\MovieRepository;
+use App\Controller\MovieController;
+
 /**
  * @Route("/commentary")
  */
@@ -18,17 +24,18 @@ class CommentaryController extends AbstractController
     /**
      * @Route("/", name="commentary_index", methods={"GET"})
      */
-    public function index(CommentaryRepository $commentaryRepository): Response
+    public function index(CommentaryRepository $commentaryRepository, $id_movie): Response
     {
-        return $this->render('commentary/index.html.twig', ['commentaries' => $commentaryRepository->findAll()]);
+        return $this->render('commentary/index.html.twig', ['commentaries' => $commentaryRepository->findByMovie($id_movie)]);
     }
 
     /**
      * @Route("/new", name="commentary_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Movie $movie): Response
     {
         $commentary = new Commentary();
+        $commentary->setFkMovie($movie);
         $form = $this->createForm(CommentaryType::class, $commentary);
         $form->handleRequest($request);
 
@@ -37,7 +44,7 @@ class CommentaryController extends AbstractController
             $entityManager->persist($commentary);
             $entityManager->flush();
 
-            return $this->redirectToRoute('commentary_index');
+            //return $this->redirectToRoute('commentary_index');
         }
 
         return $this->render('commentary/new.html.twig', [
