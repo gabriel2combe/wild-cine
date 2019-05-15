@@ -26,7 +26,10 @@ class CommentaryController extends AbstractController
      */
     public function index(CommentaryRepository $commentaryRepository, $id_movie): Response
     {
-        return $this->render('commentary/index.html.twig', ['commentaries' => $commentaryRepository->findByMovie($id_movie)]);
+        return $this->render(
+            'commentary/index.html.twig',
+            ['commentaries' => $commentaryRepository->findByMovie($id_movie)]
+        );
     }
 
     /**
