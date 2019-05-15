@@ -10,6 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use App\Entity\Commentary;
+use App\Form\CommentaryType;
+use App\Repository\CommentaryRepository;
+use App\Controller\CommentaryController;
 /**
  * @Route("/movie")
  */
@@ -47,11 +51,26 @@ class MovieController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="movie_show", methods={"GET"})
+     * @Route("/{id}", name="movie_show", methods={"GET","POST"})
      */
-    public function show(Movie $movie): Response
+    public function show(Movie $movie, CommentaryController $commentary, Request $request): Response
     {
-        return $this->render('movie/show.html.twig', ['movie' => $movie]);
+        /* Copy of method new() from CommentaryController 
+        TODO: refactor this
+        */
+        $commentary = new Commentary();
+        $commentary->setFkMovie($movie);
+        $form = $this->createForm(CommentaryType::class, $commentary);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($commentary);
+            $entityManager->flush();
+        }
+        
+
+        return $this->render('movie/show.html.twig', ['movie' => $movie, 'form'=>$form->createView()]);
     }
 
     /**
