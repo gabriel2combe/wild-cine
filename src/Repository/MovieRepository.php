@@ -6,7 +6,6 @@ use App\Entity\Movie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-
 /**
  * @method Movie|null find($id, $lockMode = null, $lockVersion = null)
  * @method Movie|null findOneBy(array $criteria, array $orderBy = null)
@@ -51,7 +50,7 @@ class MovieRepository extends ServiceEntityRepository
      * @return Movie[]
      */
     public function findByNextRelease($max_result): array //Returns the next 9 release of movies
-    {        
+    {
         return $this->createQueryBuilder('m') // "m" is an alias for Movie table
             ->where('m.release_date > CURRENT_DATE()')
             ->orderBy('m.release_date', 'ASC')

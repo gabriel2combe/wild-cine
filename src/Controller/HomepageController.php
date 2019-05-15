@@ -7,7 +7,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Movie;
 use App\Repository\MovieRepository;
 
-
 //$em = EntityManager::create($dbParams, $config);
 
 class HomepageController extends AbstractController

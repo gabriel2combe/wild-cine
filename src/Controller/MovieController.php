@@ -14,6 +14,7 @@ use App\Entity\Commentary;
 use App\Form\CommentaryType;
 use App\Repository\CommentaryRepository;
 use App\Controller\CommentaryController;
+
 /**
  * @Route("/movie")
  */
@@ -55,7 +56,7 @@ class MovieController extends AbstractController
      */
     public function show(Movie $movie, CommentaryController $commentary, Request $request): Response
     {
-        /* Copy of method new() from CommentaryController 
+        /* Copy of method new() from CommentaryController
         TODO: refactor this
         */
         $commentary = new Commentary();
