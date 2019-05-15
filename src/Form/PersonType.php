@@ -24,7 +24,7 @@ class PersonType extends AbstractType
                 'choices' => array_flip($countries),
                 'label'=>'Country'
             ))
-            ->add('born',BirthdayType::class, array(
+            ->add('born', BirthdayType::class, array(
                 'placeholder' => '',
             ))
             ->add('biography')

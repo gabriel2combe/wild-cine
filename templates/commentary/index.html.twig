@@ -1,0 +1,31 @@
+{% block title %}<h1>Commentaires</h1>{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    {% for commentary in commentaries %}
+    <div class="row border rounded w-50 mb-3">
+        <div class="col-3 text-center pt-1">
+            <img class="rounded-circle" src="https://via.placeholder.com/80" alt="avatar">
+        </div>
+
+        <div class="col-9">
+                {% for i in 1..5 %}
+                    {% if i <= commentary.score %}
+                    <span class="text-warning fa fa-star"></span>
+                    {% else %}
+                    <span class="fa fa-star"></span>
+                    {% endif %}
+                {% endfor %}            
+                <p><b>{{ commentary.pseudo }}</b> - {{ commentary.createdDatetime|date('d M Y à H:i:s') }}</p>
+                <p>{{ commentary.comment }}</p>
+        </div>
+    </div>
+    {% else %}
+    <tr>
+        <td colspan="6">Aucun commentaire</td>
+    </tr>
+    {% endfor %}
+</div>
+
+{% endblock %}

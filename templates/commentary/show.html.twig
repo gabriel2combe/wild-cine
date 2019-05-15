@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commentary{% endblock %}
+
+{% block body %}
+    <h1>Commentary</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ commentary.id }}</td>
+            </tr>
+            <tr>
+                <th>Pseudo</th>
+                <td>{{ commentary.pseudo }}</td>
+            </tr>
+            <tr>
+                <th>Created_datetime</th>
+                <td>{{ commentary.createdDatetime ? commentary.createdDatetime|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Score</th>
+                <td>{{ commentary.score }}</td>
+            </tr>
+            <tr>
+                <th>Comment</th>
+                <td>{{ commentary.comment }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('commentary_index') }}">back to list</a>
+
+    <a href="{{ path('commentary_edit', {'id': commentary.id}) }}">edit</a>
+
+    {{ include('commentary/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,27 @@
+{{ form_start(form) }}
+
+<div class="row">
+    <div class="col-3">
+        {{ form_row(form.pseudo) }}
+    </div>
+    <div class="col-2">
+        {{ form_label(form.score, 'Note') }}
+        {{ form_widget(form.score) }}
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6">
+        {{ form_label(form.comment, 'Commentaire') }}
+        {{ form_widget(form.comment, { 'attr': {'style': 'height: 100px'}}) }}
+    </div>
+</div>
+
+<!-- 'class: d-none' hide the field created_datetime which is automatically set to current time-->
+{{ form_label(form.created_datetime, 'created_datetime',{'label_attr': {'class': 'd-none'}}) }}
+{{ form_widget(form.created_datetime,{ 'attr': {'class': 'd-none'} }) }}
+
+<button class="btn">{{ button_label|default('Poster') }}</button>
+
+{{ form_end(form)}}
