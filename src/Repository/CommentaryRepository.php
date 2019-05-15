@@ -19,6 +19,22 @@ class CommentaryRepository extends ServiceEntityRepository
         parent::__construct($registry, Commentary::class);
     }
 
+    /**
+     * @return Commentary[] Returns an array of Commentary objects
+     */
+    public function findByMovie($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.fk_movie = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
+
     // /**
     //  * @return Commentary[] Returns an array of Commentary objects
     //  */
