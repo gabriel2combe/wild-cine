@@ -27,7 +27,3 @@ steps:
 
 - script: ./vendor/bin/phpcs --ignore=./src/Migrations
   displayName: 'phpcs'
-
-- task: AccessibilityChecker@0
-  inputs:
-    tagoptions: 'wcag2aa'
